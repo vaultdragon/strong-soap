@@ -73,7 +73,7 @@ support in 3.0.0.
 Install with [npm](http://github.com/isaacs/npm):
 
 ```sh
-npm install strong-soap
+npm install @vaultdragon/strong-soap
 ```
 
 ## Client
