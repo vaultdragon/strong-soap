@@ -103,6 +103,24 @@ describe('xs-date-format-tests', function() {
       var xmlDateTime = xmlHandler.toXmlDateTime('23091990');
       assert.equal(xmlDateTime, '23091990');
     });
+
+    it('returns string as is with raw input options for toXmlTime()', function () {
+      const rawInputTime = '04:01:01+08:00'
+      var xmlTime = xmlHandler.toXmlTime(rawInputTime, { rawInput: true });
+      assert.equal(xmlTime, rawInputTime);
+    });
+
+    it('returns string as is with raw input options for toXmlDate()', function () {
+      const rawInputDate = '20190327'
+      var xmlTime = xmlHandler.toXmlDate(rawInputDate, { rawInput: true });
+      assert.equal(xmlTime, rawInputDate);
+    });
+
+    it('returns string as is with raw input options for toXmlDateTime()', function () {
+      const rawInputDateTime = '2019-03-27T01:01:01+08:00'
+      var xmlTime = xmlHandler.toXmlDateTime(rawInputDateTime, { rawInput: true });
+      assert.equal(xmlTime, rawInputDateTime);
+    });
   });
   
 });
