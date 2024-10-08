@@ -43,6 +43,7 @@ class XMLHandler {
     this.options.date = this.options.date || {};
     this.options.date.timezone = this.options.date.timezone || {};
     this.options.date.timezone.enabled = typeof this.options.date.timezone.enabled === 'boolean' ? this.options.date.timezone.enabled : true;
+    this.options.date.rawInput = typeof this.options.date.rawInput === 'boolean' ? this.options.date.rawInput : false;
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
@@ -889,9 +890,13 @@ function parseValue(text, descriptor) {
  * @param {Object} [options] 
  * @param {Object} [options.timezone]
  * @param {boolean} [options.timezone.enabled]
+ * @param {boolean} [options.rawInput]
  * @returns 
  */
 function toXmlDate(date, options) {
+  if (options && options.rawInput) {
+    return date;
+  }
   try {
     const isoStr = new Date(date).toISOString();
     const formattedDate = isoStr.split('T')[0];
@@ -905,7 +910,19 @@ function toXmlDate(date, options) {
   }
 }
 
-function toXmlTime(date) {
+/**
+ * 
+ * @param {string | Date} date 
+ * @param {Object} [options] 
+ * @param {Object} [options.timezone]
+ * @param {boolean} [options.timezone.enabled]
+ * @param {boolean} [options.rawInput]
+ * @returns 
+ */
+function toXmlTime(date, options) {
+  if (options && options.rawInput) {
+    return date;
+  }
   try {
     const isoStr = new Date(date).toISOString();
     return isoStr.split('T')[1];  
@@ -914,7 +931,19 @@ function toXmlTime(date) {
   }
 }
 
-function toXmlDateTime(date) {
+/**
+ * 
+ * @param {string | Date} date 
+ * @param {Object} [options] 
+ * @param {Object} [options.timezone]
+ * @param {boolean} [options.timezone.enabled]
+ * @param {boolean} [options.rawInput]
+ * @returns 
+ */
+function toXmlDateTime(date, options) {
+  if (options && options.rawInput) {
+    return date;
+  }
   try {
     return new Date(date).toISOString();  
   } catch (err) {
@@ -929,6 +958,7 @@ function toXmlDateTime(date) {
  * @param {Object} options
  * @param {Object} options.timezone
  * @param {boolean} options.timezone.enabled
+ * @param {boolean} [options.rawInput]
  * @returns {string}
  */
 function toXmlDateOrTime(descriptor, val, options) {
@@ -936,9 +966,9 @@ function toXmlDateOrTime(descriptor, val, options) {
   if (descriptor.type.name === 'date') {
     return toXmlDate(val, options);
   } else if (descriptor.type.name === 'time') {
-    return toXmlTime(val);
+    return toXmlTime(val, options);
   } else if (descriptor.type.name === 'dateTime') {
-    return toXmlDateTime(val);
+    return toXmlDateTime(val, options);
   }
   return val;
 }
