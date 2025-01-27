@@ -1,5 +1,15 @@
 # strong-soap
 
+## How to Publish the Package to VaultDragon NPM
+
+Before following the steps below, please make sure you have npm auth token for VaultDragon configured in `~/.npmrc` file. For the token, please contact VD Dev Team.
+In case you need to generate a new token, please visit https://www.npmjs.com/settings/vd-engineering/tokens (also contact VD Dev Team for npm login with `vd-engineering` as a username)
+
+1. Update code and commit the latest changes
+2. Run `npm version <version>` to bump up the package's version. Npm will create a new commit automatically
+3. Run `npm publish` to publish the latest version to npm registry
+
+
 [![CI](https://github.com/loopbackio/strong-soap/actions/workflows/continuous-integration.yaml/badge.svg)](https://github.com/loopbackio/strong-soap/actions/workflows/continuous-integration.yaml)
 [![Build Status](https://app.travis-ci.com/loopbackio/strong-soap.svg?branch=master)](https://app.travis-ci.com/loopbackio/strong-soap)
 [![Coverage Status](https://coveralls.io/repos/github/loopbackio/strong-soap/badge.svg?branch=master)](https://coveralls.io/github/loopbackio/strong-soap?branch=master)
