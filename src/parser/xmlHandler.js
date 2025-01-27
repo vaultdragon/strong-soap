@@ -44,12 +44,13 @@ class XMLHandler {
     this.options.date.timezone = this.options.date.timezone || {};
     this.options.date.timezone.enabled = typeof this.options.date.timezone.enabled === 'boolean' ? this.options.date.timezone.enabled : true;
     this.options.date.rawInput = typeof this.options.date.rawInput === 'boolean' ? this.options.date.rawInput : false;
+    this.options.xmlBuilder = this.options.xmlBuilder || {};
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
     if (node == null) {
       node = xmlBuilder.begin(
-        {version: '1.0', encoding: 'UTF-8', standalone: true});
+        {version: '1.0', encoding: 'UTF-8', standalone: true, ...this.options.xmlBuilder});
     }
     if (nsContext == null) {
       nsContext = new NamespaceContext();
