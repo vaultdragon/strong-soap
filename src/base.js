@@ -69,11 +69,11 @@ class Base extends EventEmitter {
     this.wsdl.options.prettyResponse = options.prettyResponse !== undefined ? options.prettyResponse : true;
   }
 
-  static createSOAPEnvelope(prefix, nsURI) {
+  static createSOAPEnvelope(prefix, nsURI, xmlBuilderOptions = {}) {
     prefix = prefix || 'soap';
     nsURI = nsURI || 'http://schemas.xmlsoap.org/soap/envelope/';
     var doc = xmlBuilder.create(prefix + ':Envelope',
-      {version: '1.0', encoding: 'UTF-8', standalone: true});
+      {version: '1.0', encoding: 'UTF-8', standalone: true, ...xmlBuilderOptions});
     doc.attribute('xmlns:' + prefix, nsURI);
     let header = doc.element(prefix + ':Header');
     let body = doc.element(prefix + ':Body');

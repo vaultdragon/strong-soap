@@ -28,6 +28,7 @@ class Client extends Base {
     this.xmlHandler = new XMLHandler(wsdl.definitions.schemas, options);
     this._initializeServices(endpoint);
     this.httpClient = options.httpClient || new HttpClient(options);
+    this.xmlBuilderOptions = options.xmlBuilder || {};
   }
 
   setEndpoint(endpoint) {
@@ -204,7 +205,7 @@ class Client extends Base {
 
     var nsContext = this.createNamespaceContext(soapNsPrefix, soapNsURI);
     var xmlHandler = this.xmlHandler || new XMLHandler(this.wsdl.schemas, options);
-    var envelope = Client.createSOAPEnvelope(soapNsPrefix, soapNsURI);
+    var envelope = Client.createSOAPEnvelope(soapNsPrefix, soapNsURI, this.xmlBuilderOptions);
 
     var soapHeaderElement = envelope.header;
     var soapBodyElement = envelope.body;
